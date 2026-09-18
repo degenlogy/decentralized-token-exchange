@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Decentralized Token Exchange — Next-Gen Web3 DeFi Swap &amp; Liquidity Interface">
+  <title>DEX — Decentralized Token Exchange</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="bg-glow glow-top" aria-hidden="true"></div>
+  <div class="bg-glow glow-bottom" aria-hidden="true"></div>
+
+  <!-- Main Navigation Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-group">
+        <a href="#" class="brand-logo" id="logoLink">
+          <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" rx="10" fill="url(#logo-grad)"/>
+            <path d="M10 16L16 9L22 16L16 23L10 16Z" stroke="#FFFFFF" stroke-width="2.2" stroke-linejoin="round"/>
+            <path d="M16 13V19M13 16H19" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#3B82F6"/>
+                <stop offset="1" stop-color="#8B5CF6"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="brand-name">Degenlogy<span class="brand-highlight">DEX</span></span>
+        </a>
+        <span class="badge-demo">Premium Mode</span>
+      </div>
+
+      <!-- Desktop Nav Tabs -->
+      <nav class="desktop-nav" aria-label="Main Navigation">
+        <button type="button" class="nav-btn active" data-tab="swap">Swap</button>
+        <button type="button" class="nav-btn" data-tab="liquidity">Liquidity</button>
+        <button type="button" class="nav-btn" data-tab="portfolio">Portfolio</button>
+        <button type="button" class="nav-btn" data-tab="history">History</button>
+      </nav>
+
+      <!-- Action Group -->
+      <div class="header-actions">
+        <button type="button" class="btn-wallet" id="walletConnectBtn">
+          <span class="wallet-status-dot"></span>
+          <span id="walletBtnText">Connect Wallet</span>
+        </button>
+
+        <!-- Mobile Menu Hamburger -->
+        <button type="button" class="btn-icon mobile-menu-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div class="mobile-nav-drawer" id="mobileNavDrawer" aria-hidden="true">
+      <nav class="mobile-nav-links">
+        <button type="button" class="mobile-nav-btn active" data-tab="swap">Swap</button>
+        <button type="button" class="mobile-nav-btn" data-tab="liquidity">Liquidity</button>
+        <button type="button" class="mobile-nav-btn" data-tab="portfolio">Portfolio</button>
+        <button type="button" class="mobile-nav-btn" data-tab="history">History</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Trading Dashboard -->
+  <main class="main-layout">
+    <div class="content-container">
+
+      <!-- ==================== SWAP TAB ==================== -->
+      <section id="tab-swap" class="tab-pane active">
+        <div class="grid-two-column">
+          
+          <!-- Swap Card Container -->
+          <div class="swap-card-container">
+            <div class="card card-swap">
+              
+              <!-- Swap Header -->
+              <div class="card-header">
+                <div>
+                  <h1 class="card-title">Swap</h1>
+                  <p class="card-subtitle">Trade tokens instantly with low slippage</p>
+                </div>
+                <div class="card-header-actions">
+                  <button type="button" class="btn-icon" id="settingsBtn" title="Transaction Settings" aria-label="Settings">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                  </button>
+                  <button type="button" class="btn-icon" id="refreshRatesBtn" title="Refresh Rates" aria-label="Refresh Rates">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- From Token Box -->
+              <div class="token-input-box" id="fromTokenBox">
+                <div class="token-input-row">
+                  <span class="input-label">You Pay</span>
+                  <div class="balance-label">
+                    <span>Balance: </span>
+                    <span id="fromTokenBalance" class="balance-val">0.00</span>
+                    <button type="button" class="btn-max" id="maxBtn">MAX</button>
+                  </div>
+                </div>
+                <div class="token-input-main">
+                  <input type="number" id="fromAmountInput" class="crypto-amount-input" placeholder="0.0" min="0" step="any" autocomplete="off">
+                  <button type="button" class="token-select-btn" id="fromTokenSelectBtn" aria-label="Select Pay Token">
+                    <span class="token-icon" id="fromTokenIcon"></span>
+                    <span class="token-symbol" id="fromTokenSymbol">ETH</span>
+                    <svg class="chevron-down" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  </button>
+                </div>
+                <div class="token-fiat-row">
+                  <span id="fromFiatValue">~$0.00</span>
+                </div>
+              </div>
+
+              <!-- Swap Arrow Direction Button -->
+              <div class="swap-divider">
+                <button type="button" class="btn-swap-direction" id="switchTokensBtn" aria-label="Swap token positions">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16V4M7 4L3 8M7 4L11 8M17 8V20M17 20L21 16M17 20L13 16"/></svg>
+                </button>
+              </div>
+
+              <!-- To Token Box -->
+              <div class="token-input-box" id="toTokenBox">
+                <div class="token-input-row">
+                  <span class="input-label">You Receive</span>
+                  <div class="balance-label">
+                    <span>Balance: </span>
+                    <span id="toTokenBalance" class="balance-val">0.00</span>
+                  </div>
+                </div>
+                <div class="token-input-main">
+                  <input type="number" id="toAmountInput" class="crypto-amount-input" placeholder="0.0" readonly autocomplete="off">
+                  <button type="button" class="token-select-btn" id="toTokenSelectBtn" aria-label="Select Receive Token">
+                    <span class="token-icon" id="toTokenIcon"></span>
+                    <span class="token-symbol" id="toTokenSymbol">USDC</span>
+                    <svg class="chevron-down" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  </button>
+                </div>
+                <div class="token-fiat-row">
+                  <span id="toFiatValue">~$0.00</span>
+                </div>
+              </div>
+
+              <!-- Swap Pricing & Route Breakdown Details -->
+              <div class="trade-meta-box" id="tradeMetaBox">
+                <div class="meta-row">
+                  <span class="meta-title">Rate</span>
+                  <span class="meta-value font-mono" id="rateDisplay">1 ETH = 3,500 USDC</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-title">Price Impact</span>
+                  <span class="meta-value font-mono" id="priceImpactDisplay">&lt; 0.01%</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-title">Routing Liquidity</span>
+                  <span class="meta-value font-mono" id="routeLiquidityDisplay">$24.8M (Automated Route)</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-title">Est. Network Fee</span>
+                  <span class="meta-value font-mono text-muted" id="networkFeeDisplay">~$2.45 (Demo)</span>
+                </div>
+              </div>
+
+              <!-- Primary Action Button -->
+              <button type="button" class="btn-primary-action" id="mainSwapActionBtn">
+                Connect Wallet
+              </button>
+            </div>
+          </div>
+
+          <!-- Market Overview & Info Sidebar -->
+          <div class="market-panel-container">
+            <div class="card card-market">
+              <div class="card-header">
+                <div>
+                  <h2 class="card-title">Market Overview</h2>
+                  <p class="card-subtitle">Demo Market Data Feed</p>
+                </div>
+                <span class="badge-pulse">Live Simulated</span>
+              </div>
+
+              <!-- Market Token List -->
+              <div class="market-list" id="marketList">
+                <!-- Dynamically populated via JS -->
+              </div>
+
+              <!-- Protocol Analytics Summary -->
+              <div class="protocol-stats">
+                <div class="stat-card">
+                  <span class="stat-label">24h Volume</span>
+                  <span class="stat-val font-mono">$184.2M</span>
+                </div>
+                <div class="stat-card">
+                  <span class="stat-label">Total Value Locked</span>
+                  <span class="stat-val font-mono">$842.6M</span>
+                </div>
+                <div class="stat-card">
+                  <span class="stat-label">Total Pairs</span>
+                  <span class="stat-val font-mono">1,420</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==================== LIQUIDITY TAB ==================== -->
+      <section id="tab-liquidity" class="tab-pane">
+        <div class="single-column-layout">
+          <div class="card card-liquidity">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Pool Liquidity</h2>
+                <p class="card-subtitle">Provide liquidity to earn simulated protocol trading fees</p>
+              </div>
+            </div>
+
+            <div class="liquidity-inputs">
+              <div class="token-input-box">
+                <div class="token-input-row">
+                  <span class="input-label">First Token</span>
+                  <span class="balance-label">Balance: <span id="liqFirstBalance">1.245 ETH</span></span>
+                </div>
+                <div class="token-input-main">
+                  <input type="number" id="liqFirstAmount" class="crypto-amount-input" placeholder="0.0" min="0" step="any">
+                  <div class="token-badge-static">
+                    <span class="token-icon" id="liqFirstIcon"></span>
+                    <span class="token-symbol">ETH</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="plus-divider" aria-hidden="true">+</div>
+
+              <div class="token-input-box">
+                <div class="token-input-row">
+                  <span class="input-label">Second Token</span>
+                  <span class="balance-label">Balance: <span id="liqSecondBalance">4,500 USDC</span></span>
+                </div>
+                <div class="token-input-main">
+                  <input type="number" id="liqSecondAmount" class="crypto-amount-input" placeholder="0.0" min="0" step="any">
+                  <div class="token-badge-static">
+                    <span class="token-icon" id="liqSecondIcon"></span>
+                    <span class="token-symbol">USDC</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="trade-meta-box">
+              <div class="meta-row">
+                <span class="meta-title">Pool Share Estimated</span>
+                <span class="meta-value font-mono">0.035%</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-title">LP Reward Rate (APY)</span>
+                <span class="meta-value font-mono text-success">14.8%</span>
+              </div>
+            </div>
+
+            <button type="button" class="btn-primary-action" id="addLiquidityBtn">
+              Supply Demo Liquidity
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== PORTFOLIO TAB ==================== -->
+      <section id="tab-portfolio" class="tab-pane">
+        <div class="single-column-layout">
+          <div class="card card-portfolio">
+            <div class="portfolio-header-banner">
+              <div>
+                <span class="portfolio-caption">Total Demo Net Worth</span>
+                <h2 class="portfolio-total font-mono" id="portfolioTotalValue">$0.00</h2>
+              </div>
+              <button type="button" class="btn-secondary" id="resetBalancesBtn">Reset Demo Balances</button>
+            </div>
+
+            <div class="portfolio-table-container">
+              <table class="portfolio-table">
+                <thead>
+                  <tr>
+                    <th>Asset</th>
+                    <th>Price</th>
+                    <th>Balance</th>
+                    <th class="text-right">Value</th>
+                  </tr>
+                </thead>
+                <tbody id="portfolioTableBody">
+                  <!-- Injected via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== HISTORY TAB ==================== -->
+      <section id="tab-history" class="tab-pane">
+        <div class="single-column-layout">
+          <div class="card card-history">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Recent Activity</h2>
+                <p class="card-subtitle">Simulated client-side transaction log</p>
+              </div>
+              <button type="button" class="btn-secondary" id="clearHistoryBtn">Clear Log</button>
+            </div>
+
+            <div class="history-list-container" id="historyListContainer">
+              <!-- Dynamically populated or empty state -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- 1. Token Selector Modal -->
+  <div class="modal-backdrop" id="tokenModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="tokenModalTitle">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 class="modal-title" id="tokenModalTitle">Select a token</h3>
+        <button type="button" class="btn-icon close-modal-btn" data-close="tokenModal" aria-label="Close modal">✕</button>
+      </div>
+      <div class="modal-search-wrapper">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="tokenSearchInput" class="modal-search-input" placeholder="Search by name or symbol" autocomplete="off">
+      </div>
+      <div class="token-list" id="modalTokenList">
+        <!-- Rendered tokens -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Wallet Connect Modal -->
+  <div class="modal-backdrop" id="walletModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="walletModalTitle">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 class="modal-title" id="walletModalTitle">Connect a Wallet</h3>
+        <button type="button" class="btn-icon close-modal-btn" data-close="walletModal" aria-label="Close modal">✕</button>
+      </div>
+      <p class="modal-description">Connect a simulated demo account or Web3 browser provider.</p>
+      <div class="wallet-options">
+        <button type="button" class="wallet-option-item" id="connectDemoWalletBtn">
+          <div class="wallet-option-info">
+            <span class="wallet-name">Demo Simulated Account</span>
+            <span class="wallet-sub">Instant access with preloaded balances</span>
+          </div>
+          <span class="badge-recommended">Instant</span>
+        </button>
+        <button type="button" class="wallet-option-item" id="connectInjectedWalletBtn">
+          <div class="wallet-option-info">
+            <span class="wallet-name">Browser Web3 Wallet</span>
+            <span class="wallet-sub">Injected Provider (e.g. MetaMask/Rabby)</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Transaction Settings Modal -->
+  <div class="modal-backdrop" id="settingsModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="settingsModalTitle">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 class="modal-title" id="settingsModalTitle">Transaction Settings</h3>
+        <button type="button" class="btn-icon close-modal-btn" data-close="settingsModal" aria-label="Close modal">✕</button>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-label-row">
+          <span class="settings-label">Slippage Tolerance</span>
+          <span class="settings-hint" title="Your transaction will revert if the price changes unfavorably by more than this percentage.">ⓘ</span>
+        </div>
+        <div class="slippage-presets">
+          <button type="button" class="btn-preset" data-slippage="0.1">0.1%</button>
+          <button type="button" class="btn-preset active" data-slippage="0.5">0.5%</button>
+          <button type="button" class="btn-preset" data-slippage="1.0">1.0%</button>
+          <div class="custom-slippage-input">
+            <input type="number" id="customSlippageInput" placeholder="Custom" min="0.01" max="50" step="0.1">
+            <span>%</span>
+          </div>
+        </div>
+        <span class="settings-warning" id="slippageWarning" hidden>High slippage increases the risk of frontrunning!</span>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-label-row">
+          <span class="settings-label">Transaction Deadline</span>
+          <span class="settings-hint" title="Your transaction will revert if it is pending for more than this period.">ⓘ</span>
+        </div>
+        <div class="deadline-input-row">
+          <input type="number" id="deadlineInput" value="20" min="1" max="180">
+          <span>Minutes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Swap Confirmation Modal -->
+  <div class="modal-backdrop" id="confirmModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="confirmModalTitle">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 class="modal-title" id="confirmModalTitle">Confirm Swap</h3>
+        <button type="button" class="btn-icon close-modal-btn" data-close="confirmModal" aria-label="Close modal">✕</button>
+      </div>
+
+      <div class="confirm-swap-body">
+        <div class="confirm-token-row">
+          <div class="confirm-token-details">
+            <span class="confirm-amount font-mono" id="confirmPayAmount">1.00</span>
+            <span class="confirm-symbol" id="confirmPaySymbol">ETH</span>
+          </div>
+          <span class="confirm-label">You Pay</span>
+        </div>
+
+        <div class="confirm-arrow-row">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+        </div>
+
+        <div class="confirm-token-row">
+          <div class="confirm-token-details">
+            <span class="confirm-amount font-mono text-success" id="confirmReceiveAmount">3,500.00</span>
+            <span class="confirm-symbol" id="confirmReceiveSymbol">USDC</span>
+          </div>
+          <span class="confirm-label">You Receive</span>
+        </div>
+
+        <div class="confirm-info-box">
+          <div class="meta-row">
+            <span class="meta-title">Exchange Rate</span>
+            <span class="meta-value font-mono" id="confirmRate">1 ETH = 3,500 USDC</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-title">Slippage Tolerance</span>
+            <span class="meta-value font-mono" id="confirmSlippage">0.5%</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-title">Guaranteed Minimum</span>
+            <span class="meta-value font-mono" id="confirmMinReceived">3,482.50 USDC</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-title">Simulated Network Gas</span>
+            <span class="meta-value font-mono">~$2.45</span>
+          </div>
+        </div>
+
+        <div class="modal-action-buttons">
+          <button type="button" class="btn-secondary" data-close="confirmModal">Cancel</button>
+          <button type="button" class="btn-primary-action" id="executeSwapBtn">Confirm Demo Swap</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Success Modal -->
+  <div class="modal-backdrop" id="successModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="successModalTitle">
+    <div class="modal-window text-center">
+      <div class="success-icon-badge">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <h3 class="modal-title" id="successModalTitle">Swap Successful</h3>
+      <p class="success-summary font-mono" id="successSummaryText">1.0 ETH → 3,500 USDC</p>
+      
+      <div class="demo-notice-box">
+        <strong>Demo Simulated Transaction</strong>
+        <p>This trade was processed in local simulated memory. No real on-chain transaction or funds were transferred.</p>
+      </div>
+
+      <button type="button" class="btn-primary-action" data-close="successModal">Done</button>
+    </div>
+  </div>
+
+  <!-- Reusable Toast Notification Container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Connected JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>
